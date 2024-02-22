@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface ResidentDetailsProps {
   character: {
@@ -32,10 +34,25 @@ const ResidentDetails: React.FC<ResidentDetailsProps> = ({ character }) => {
   };
 
   const handleSaveNotes = () => {
-    // Save notes to local storage
-    localStorage.setItem(`notes-${character.id}`, notes);
+    try {
+      localStorage.setItem(`notes-${character.id}`, notes);
+      toast.success("Notes saved successfully", {
+        position: "top-center",
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      toast.error("Failed to save notes", {
+        position: "top-center",
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
-
   return (
     <div className="mx-10 max-w-md my-10 md:mx-auto">
       <div className="flex flex-col justify-center">
@@ -67,17 +84,17 @@ const ResidentDetails: React.FC<ResidentDetailsProps> = ({ character }) => {
           <label className="label text-xs">Location</label>
           <p className="text-gray-400 ml-1">{character.location.name}</p>
         </div>
-        <div className="flex flex-col mt-2">
+        <form className="flex flex-col mt-2" onSubmit={handleSaveNotes}>
           <textarea
             value={notes}
             onChange={handleNotesChange}
             placeholder="Add notes about the character..."
             className="textarea textarea-bordered h-24"
           />
-          <button onClick={handleSaveNotes} className="btn btn-outline mt-2">
+          <button type="submit" className="btn btn-outline mt-2">
             Save Notes
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
@@ -103,8 +120,6 @@ export async function getServerSideProps({ params }: Params) {
     }
 
     const characterDetails = await response.json();
-
-    console.log(characterDetails);
 
     return {
       props: {
