@@ -38,9 +38,28 @@ export default function Home({ locations }: Props) {
     setSearchInput(event.target.value);
   };
 
-  const filteredLocations = locations.filter((location) =>
-    location.name.toLowerCase().includes(searchInput.toLowerCase())
-  );
+  const filteredLocations = locations.filter((location) => {
+    const locationNameIncludesSearch = location.name
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    const characterNameIncludesSearch = location.residents.some((resident) =>
+      resident.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    const episodeNameIncludesSearch = location.residents.some((resident) => {
+      if (resident.episode) {
+        return resident.episode.some((episode) =>
+          episode.toLowerCase().includes(searchInput.toLowerCase())
+        );
+      }
+      return false;
+    });
+
+    return (
+      locationNameIncludesSearch ||
+      characterNameIncludesSearch ||
+      episodeNameIncludesSearch
+    );
+  });
 
   return (
     <>
@@ -117,6 +136,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
                 name: residentData.name,
                 status: residentData.status,
                 image: residentData.image,
+                episode: residentData.episode,
               };
             })
             .catch((error) => {
