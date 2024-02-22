@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "@/components/navbar";
 import CharacterCard from "@/components/character-card";
 import { GetServerSideProps } from "next";
 
@@ -45,7 +44,6 @@ export default function Home({ locations }: Props) {
 
   return (
     <>
-      <Navbar />
       <section className="m-6">
         <div className="flex justify-center">
           <label className="input input-bordered flex items-center gap-2">
