@@ -2,10 +2,11 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-#Technologies Used
+## Technologies Used
 - Next.js: The project utilizes Next.js for server-side rendering and routing.
 - TypeScript: TypeScript is used for type-checking and enhanced development experience.
 - tailwindcss: The project leverages tailwindcss for styling.
+- daisyui as a tailwind plugin
 
 Documentation
 - The project includes detailed documentation in the README.md file available in the GitHub repository. This documentation covers the following aspects:
