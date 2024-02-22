@@ -1,4 +1,17 @@
+## Rick & Morty API Integration Project
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+#Technologies Used
+- Next.js: The project utilizes Next.js for server-side rendering and routing.
+- TypeScript: TypeScript is used for type-checking and enhanced development experience.
+- tailwindcss: The project leverages tailwindcss for styling.
+
+Documentation
+- The project includes detailed documentation in the README.md file available in the GitHub repository. This documentation covers the following aspects:
+- Rationale Behind Technologies: The documentation explains why Next.js, TypeScript, and tailwindcss were chosen for the project, highlighting their suitability for showcasing both frontend and backend skills.
+- Design Considerations: It outlines the design considerations taken into account while integrating the Rick & Morty API, including data fetching strategies and component architecture.
+- Implementation Details: The README.md provides insights into the implementation details, such as how data is fetched from the API, how components are structured, and any customizations made to enhance user experience.
 
 ## Getting Started
 
