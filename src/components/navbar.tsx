@@ -1,17 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
     <div className="navbar bg-primary">
       <div className="flex-1">
-        <div className="btn btn-ghost text-xl">
+        <Link href="/" className="btn btn-ghost text-xl">
           <Image
             src={"/rick-and-morty-logo.png"}
             width={100}
             height={50}
             alt="rick-and-morty-logo"
           />
-        </div>
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
