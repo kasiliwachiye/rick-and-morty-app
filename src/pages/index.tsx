@@ -71,7 +71,7 @@ export default function Home({ locations }: Props) {
         {filteredLocations.map((location) => (
           <div key={location.id}>
             <h2 className="text-2xl font-bold mt-8 mb-4">{location.name}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {location.residents.map((resident) => (
                 <CharacterCard
                   key={resident.id}
@@ -98,20 +98,35 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const data = await res.json();
     const locations: Location[] = data.results;
 
+    const residentPromises: Promise<void>[] = [];
+
     for (let location of locations) {
-      for (let i = 0; i < location.residents.length; i++) {
-        const res = await fetch(location.residents[i]);
-        if (res.ok) {
-          const residentData = await res.json();
-          location.residents[i] = {
-            id: residentData.id,
-            name: residentData.name,
-            status: residentData.status,
-            image: residentData.image,
-          };
-        }
-      }
+      location.residents.forEach((residentUrl, index) => {
+        residentPromises.push(
+          fetch(residentUrl)
+            .then((res) => {
+              if (res.ok) {
+                return res.json();
+              } else {
+                throw new Error("Failed to fetch resident data");
+              }
+            })
+            .then((residentData) => {
+              location.residents[index] = {
+                id: residentData.id,
+                name: residentData.name,
+                status: residentData.status,
+                image: residentData.image,
+              };
+            })
+            .catch((error) => {
+              console.error("Error fetching resident data:", error);
+            })
+        );
+      });
     }
+
+    await Promise.all(residentPromises);
 
     return {
       props: { locations },
@@ -123,4 +138,3 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     };
   }
 };
-
