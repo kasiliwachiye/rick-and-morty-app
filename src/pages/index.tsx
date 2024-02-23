@@ -89,7 +89,8 @@ export default function Home({ locations }: Props) {
         </div>
         {filteredLocations.map((location) => (
           <div key={location.id}>
-            <h2 className="text-2xl font-bold mt-8 mb-4">{location.name}</h2>
+            <h2 className="text-2xl font-bold mt-8">{location.name}</h2>
+            <h2 className="text-lg font-bold text-gray-400 mb-4">{location.type}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {location.residents.map((resident) => (
                 <CharacterCard

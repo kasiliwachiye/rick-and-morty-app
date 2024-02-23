@@ -13,6 +13,7 @@ Documentation
 - Rationale Behind Technologies: The documentation explains why Next.js, TypeScript, and tailwindcss were chosen for the project, highlighting their suitability for showcasing both frontend and backend skills.
 - Design Considerations: It outlines the design considerations taken into account while integrating the Rick & Morty API, including data fetching strategies and component architecture.
 - Implementation Details: The README.md provides insights into the implementation details, such as how data is fetched from the API, how components are structured, and any customizations made to enhance user experience.
+- I used local storage for storing the notes about the user as it's a simple approach to persist data since it doesn't expire when the session ends
 
 ## Getting Started
 
